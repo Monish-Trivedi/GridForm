@@ -11,8 +11,7 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
 class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
-{
-    const NAME = 'image';
+{    
     const ALT_FIELD = 'name';
     protected $storeManager;
 

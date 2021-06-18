@@ -90,12 +90,6 @@ class InstallSchema implements InstallSchemaInterface
 			['nullable' => false,'default' => 0],
 			'Status'
 		)->addColumn(
-			'image',
-			\Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-			255,
-			['nullable' => true,'default' => null],
-			'Image'
-		)->addColumn(
 			'created_at',
 			\Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
 			null,

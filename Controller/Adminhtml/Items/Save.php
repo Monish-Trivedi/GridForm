@@ -14,40 +14,40 @@ class Save extends \TrainingMonish\GridForm\Controller\Adminhtml\Items
             try {
                 $model = $this->_objectManager->create('TrainingMonish\GridForm\Model\GridForm');
                 $data = $this->getRequest()->getPostValue();
-                if(isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
-                    try{
-                        $uploaderFactory = $this->uploaderFactory->create(['fileId' => 'image']);
-                        $uploaderFactory->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
-                        $imageAdapter = $this->adapterFactory->create();
-                        $uploaderFactory->addValidateCallback('custom_image_upload',$imageAdapter,'validateUploadFile');
-                        $uploaderFactory->setAllowRenameFiles(true);
-                        $uploaderFactory->setFilesDispersion(true);
-                        $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA);
-                        $destinationPath = $mediaDirectory->getAbsolutePath('trainingmonish/gridform');
-                        $result = $uploaderFactory->save($destinationPath);
-                        if (!$result) {
-                            throw new LocalizedException(
-                                __('File cannot be saved to path: $1', $destinationPath)
-                            );
-                        }
+                // if(isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
+                //     try{
+                //         $uploaderFactory = $this->uploaderFactory->create(['fileId' => 'image']);
+                //         $uploaderFactory->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+                //         $imageAdapter = $this->adapterFactory->create();
+                //         $uploaderFactory->addValidateCallback('custom_image_upload',$imageAdapter,'validateUploadFile');
+                //         $uploaderFactory->setAllowRenameFiles(true);
+                //         $uploaderFactory->setFilesDispersion(true);
+                //         $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA);
+                //         $destinationPath = $mediaDirectory->getAbsolutePath('trainingmonish/gridform');
+                //         $result = $uploaderFactory->save($destinationPath);
+                //         if (!$result) {
+                //             throw new LocalizedException(
+                //                 __('File cannot be saved to path: $1', $destinationPath)
+                //             );
+                //         }
                         
-                        $imagePath = 'trainingmonish/gridform'.$result['file'];
-                        $data['image'] = $imagePath;
-                    } catch (\Exception $e) {
-                    }
-                }
-                if(isset($data['image']['delete']) && $data['image']['delete'] == 1) {
-                    $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA)->getAbsolutePath();
-                    $file = $data['image']['value'];
-                    $imgPath = $mediaDirectory.$file;
-                    if ($this->_file->isExists($imgPath))  {
-                        $this->_file->deleteFile($imgPath);
-                    }
-                    $data['image'] = NULL;
-                }
-                if (isset($data['image']['value'])){
-                    $data['image'] = $data['image']['value'];
-                }
+                //         $imagePath = 'trainingmonish/gridform'.$result['file'];
+                //         $data['image'] = $imagePath;
+                //     } catch (\Exception $e) {
+                //     }
+                // }
+                // if(isset($data['image']['delete']) && $data['image']['delete'] == 1) {
+                //     $mediaDirectory = $this->filesystem->getDirectoryRead($this->directoryList::MEDIA)->getAbsolutePath();
+                //     $file = $data['image']['value'];
+                //     $imgPath = $mediaDirectory.$file;
+                //     if ($this->_file->isExists($imgPath))  {
+                //         $this->_file->deleteFile($imgPath);
+                //     }
+                //     $data['image'] = NULL;
+                // }
+                // if (isset($data['image']['value'])){
+                //     $data['image'] = $data['image']['value'];
+                // }
                 $inputFilter = new \Zend_Filter_Input(
                     [],
                     [],
